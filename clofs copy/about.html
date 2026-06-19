@@ -1,0 +1,84 @@
+N<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>About - Lost & Found</title>
+   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="bg-blue-50 text-blue-800 font-poppins p-5">
+
+    <!-- Navigation Bar -->
+    <nav class="navbar bg-blue-700 p-4 flex justify-between items-center rounded-lg shadow-md">
+        <div class="logo text-white text-2xl font-semibold">CLOF</div>
+        <ul class="nav-links flex space-x-6">
+            <li><a href="dashboard.html" class="text-white hover:text-blue-200 transition">Home</a></li>
+            <li><a href="history.php?email=user@example.com" class="text-white hover:text-blue-200 transition">History</a></li>
+            <li><a href="search.html" class="text-white hover:text-blue-200 transition">Search</a></li>
+            <li><a href="about.html" class="text-white hover:text-blue-200 transition">About</a></li>
+            <li><a href="help.html" class="text-white hover:text-blue-200 transition">Help</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero text-center py-10">
+        <h1 class="text-3xl font-bold text-blue-700">🌊 Learn About Us!</h1>
+        <p class="text-lg mt-2 text-blue-600">Dive into the sweet story behind CLOF and how we help you!</p>
+    </section>
+
+    <!-- About Topics -->
+    <section class="help-topics max-w-4xl mx-auto px-4 py-8 grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="help-card bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition transform hover:scale-105" data-aos="fade-up">
+            <h3 class="text-xl font-semibold text-blue-600">🌟 What is <span class="text-blue-500">Lost & Found</span>?</h3>
+            <p class="mt-2 text-blue-700">CLOF is your cool campus buddy for reporting and finding lost treasures! Lost a bag? Found a phone? We’ve got your back with care! 🎶</p>
+        </div>
+        <div class="help-card bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition transform hover:scale-105" data-aos="fade-right">
+            <h3 class="text-xl font-semibold text-blue-600">🚢 How it Works</h3>
+            <p class="mt-2 text-blue-700">Just <span class="text-blue-500">report</span> what you found or <span class="text-blue-500">search</span> for your missing goodies! A secret question keeps it safe. 🐠</p>
+        </div>
+        <div class="help-card bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition transform hover:scale-105" data-aos="fade-left">
+            <h3 class="text-xl font-semibold text-blue-600">💙 Why It Matters</h3>
+            <p class="mt-2 text-blue-700">We spread kindness and build a happy campus vibe! Returning items makes everyone feel loved and safe. 🌴</p>
+        </div>
+        <div class="help-card bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition transform hover:scale-105" data-aos="fade-up">
+            <h3 class="text-xl font-semibold text-blue-600">🌴 Who Can Use It?</h3>
+            <p class="mt-2 text-blue-700">All students and staff can join the fun! No account needed—just dive in and explore! 🐳</p>
+        </div>
+    </section>
+
+    <!-- Support Info -->
+    <footer class="footer bg-blue-700 text-white p-6 mt-8 rounded-lg shadow-md">
+        <div class="footer-container flex justify-between max-w-4xl mx-auto">
+            <div class="footer-column">
+                <h3 class="text-lg font-semibold">Contact Us</h3>
+                <ul class="mt-2 space-y-1">
+                    <li>Email: <a href="mailto:support@lofcollege.com" class="hover:text-blue-200">support@lofcollege.com</a></li>
+                    <li>Phone: +255 712 345 678</li>
+                    <li>Office: Room 12, Admin Block</li>
+                    <li>Hours: Mon - Fri | 9AM - 5PM</li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3 class="text-lg font-semibold">Quick Links</h3>
+                <ul class="mt-2 space-y-1">
+                    <li><a href="about.html" class="hover:text-blue-200">About This System</a></li>
+                    <li><a href="help.html" class="hover:text-blue-200">Help & FAQ</a></li>
+                    <li><a href="search.html" class="hover:text-blue-200">Search Lost Item</a></li>
+                    <li><a href="found.html" class="hover:text-blue-200">Report Found Item</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom mt-4 text-center">
+            <p>© 2025 LOF College. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 1000,
+            once: true
+        });
+    </script>
+</body>
+</html>

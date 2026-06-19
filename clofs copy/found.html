@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Report Found Item</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="logo">CLOF</div>
+        <ul class="nav-links">
+            <li><a href="dashboard.html">Home</a></li>
+           <!-- <li><a href="history.html">History</a></li>-->
+<a href="history.php?email=user@example.com">History</a> 
+            <li><a href="search.html">Search</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="help.html">Help</a></li>
+        </ul>
+    </nav>
+
+    <!-- Report Form Section -->
+    <section class="form-section">
+        <h1>Report a Found Item</h1>
+<form class="report-form" action="submit_found.php" method="POST" enctype="multipart/form-data">
+
+             <label for="item-type">Item Type:</label>
+    <select id="item-type" name="item-type" onchange="updateSuggestions()" required>
+        <option value="">Items</option>
+        <option value="bag">Bag</option>
+        <option value="phone">Phone</option>
+        <option value="book">Book</option>
+        <option value="others">Others</option>
+    </select>
+</div>
+
+            <label for="item-name">Item Name</label>
+            <input type="text" id="item-name" name="item-name" placeholder="e.g., Black Backpack" required>
+
+            <label for="description">Description</label>
+            <textarea id="description" name="description" rows="4" placeholder="Describe the item in detail..." required></textarea>
+
+            <label for="location">Location</label>
+           <select id="location" name="location" required>
+    <option value="">Choose a location</option>
+    <option value="Library">Library</option>
+    <option value="Main Gate">At the main gate</option>
+    <option value="Field">Football/Netball fields</option>
+    <option value="Toilets">Toilets</option>
+</select>
+
+
+            <label for="date-found">Date Found</label>
+            <input type="date" id="date-found" name="date-found" required>
+
+            <label for="photo">Upload Photo (optional)</label>
+            <input type="file" id="photo" name="photo" accept="image/*">
+
+    <label for="secret-question">Pick a Secret Question:</label>
+    <select id="secret-question" name="secret-question" required>
+        <option value="">-- Choose a suggested question --</option>
+        <!-- Suggestions will auto-update based on item type -->
+    </select>
+
+<label for="secret-answer">Answer to Secret Question</label>
+<input type="text" id="secret-answer" name="secret-answer" placeholder="e.g., Red HP laptop inside" required>
+
+
+    <label for="custom-question">Or Write Your Own (optional):</label>
+    <input type="text" id="custom-question" name="custom-question" placeholder="Write a smart ownership question...">
+
+<label for="unique-answer">Answer to Custom Question (if any)</label>
+<input type="text" id="unique-answer" name="unique-answer" placeholder="e.g., It has a scratch near the logo">
+
+  <label for="full-name">Your Full Name</label>
+            <input type="text" id="full-name" name="full-name" placeholder="e.g., Amani Joseph" required>
+
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email" placeholder="e.g., amani@example.com" required>
+
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" name="phone" placeholder="e.g., +255 712 345 678" required>
+
+
+            <button type="submit" class="submit-btn">Submit Report</button>
+        </form>
+    </section>
+
+   <footer class="footer">
+  <div class="footer-container">
+    <div class="footer-column">
+      <h3>Contact Us</h3>
+      <ul>
+        <li>Email: <a href="mailto:support@lofcollege.com">support@lofcollege.com</a></li>
+        <li>Phone: +255 712 345 678</li>
+        <li>Office: Room 12, Admin Block</li>
+        <li>Hours: Mon - Fri | 9AM - 5PM</li>
+      </ul>
+    </div>
+
+    <div class="footer-column">
+      <h3>Quick Links</h3>
+      <ul>
+        <li><a href="about.html">About This System</a></li>
+        <li><a href="help.html">Help & FAQ</a></li>
+        <li><a href="search.html">Search Lost Item</a></li>
+        <li><a href="found.html">Report Found Item</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>&copy; 2025 LOF College. All rights reserved.</p>
+  </div>
+</footer>
+</body>
+
+<script>
+function updateSuggestions() {
+    var itemType = document.getElementById('item-type').value;
+    var secretQuestion = document.getElementById('secret-question');
+    
+    // Clear previous options
+    secretQuestion.innerHTML = '<option value="">-- Choose a suggested question --</option>';
+
+    // Suggested questions based on item
+    var questions = {
+        bag: [
+            "What is inside the bag?",
+            "What brand is the bag?",
+            "What color is the inside lining?"
+        ],
+        phone: [
+            "What is the lock screen wallpaper?",
+            "What color is the phone case?",
+            "What app is pinned on the home screen?"
+        ],
+        book: [
+            "What is the color of the cover?",
+            "What is the last page number?",
+            "Is there any personal note inside?"
+        ],
+        others: [
+            "Describe a unique detail about the item.",
+            "Is there a sticker or writing on it?"
+        ]
+    };
+
+    // Add new options based on selected item type
+    if (questions[itemType]) {
+        questions[itemType].forEach(function(q) {
+            var option = document.createElement('option');
+            option.value = q;
+            option.text = q;
+            secretQuestion.appendChild(option);
+        });
+    }
+}
+</script>
+</html>

@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Lost & Found Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .results-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      padding: 20px;
+    }
+
+    .item-card {
+      background: #f8f9fa;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      padding: 16px;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .item-card:hover {
+      transform: scale(1.02);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    .pagination {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .page-btn {
+      background-color: #ffffff;
+      border: 1px solid #0077b6;
+      color: #0077b6;
+      padding: 8px 12px;
+      margin: 2px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+
+    .page-btn:hover,
+    .page-btn.active {
+      background-color: #0077b6;
+      color: white;
+    }
+
+    .item-image {
+      width: 100%;
+      height: auto;
+      border-radius: 6px;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Navigation Bar -->
+<nav class="navbar">
+        <div class="logo">CLOF</div>
+        <ul class="nav-links">
+            <li><a href="dashboard.html">Home</a></li>
+           <!-- <li><a href="history.html">History</a></li>-->
+<a href="history.php?email=user@example.com">History</a> 
+            <li><a href="search.html">Search</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="help.html">Help</a></li>
+        </ul>
+    </nav>
+
+<div class="header">
+  <h1>🔍 Search Lost Items</h1>
+</div>
+
+<section class="search-section">
+  <h2>🎯 Browse by Category</h2>
+  <div class="filter-group">
+    <label for="category-filter">Select a Category:</label>
+    <select id="category-filter" onchange="filterByCategory()">
+      <option value="">All Categories</option>
+      <option value="Bag">Bag</option>
+      <option value="Phone">Phone</option>
+      <option value="Book">Book</option>
+      <option value="ID">ID Card</option>
+      <option value="Others">Others</option>
+    </select>
+  </div>
+</section>
+
+<div class="results-grid" id="results">
+  <!-- JS will insert cards -->
+</div>
+
+<div class="pagination" id="pagination"></div>
+
+<footer class="footer">
+  <div class="footer-container">
+    <div class="footer-column">
+      <h3>Contact Us</h3>
+      <ul>
+        <li>Email: <a href="mailto:support@lofcollege.com">support@lofcollege.com</a></li>
+        <li>Phone: +255 712 345 678</li>
+        <li>Office: Room 12, Admin Block</li>
+        <li>Hours: Mon - Fri | 9AM - 5PM</li>
+      </ul>
+    </div>
+
+    <div class="footer-column">
+      <h3>Quick Links</h3>
+      <ul>
+        <li><a href="about.html">About This System</a></li>
+        <li><a href="help.html">Help & FAQ</a></li>
+        <li><a href="search.html">Search Lost Item</a></li>
+        <li><a href="found.html">Report Found Item</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>&copy; 2025 LOF College. All rights reserved.</p>
+  </div>
+</footer>
+
+<!-- ✅ JavaScript -->
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  let items = [];
+  const itemsPerPage = 4;
+  let currentPage = 1;
+
+  async function fetchItems() {
+    try {
+      const res = await fetch("fetch_items.php");
+      const data = await res.json();
+      items = data;
+      filterByCategory(); // Filter initially
+    } catch (error) {
+      console.error("Error fetching items:", error);
+    }
+  }
+
+  function filterByCategory() {
+    const category = document.getElementById("category-filter").value;
+   const filteredItems = category
+  ? items.filter(item => item.category.toLowerCase() === category.toLowerCase())
+  : items;
+
+    displayItems(filteredItems, currentPage);
+    setupPagination(filteredItems);
+  }
+
+  function displayItems(list, page) {
+    const start = (page - 1) * itemsPerPage;
+    const end = start + itemsPerPage;
+    const paginatedItems = list.slice(start, end);
+
+    const results = document.getElementById('results');
+    results.innerHTML = '';
+
+    paginatedItems.forEach(item => {
+      const card = document.createElement('div');
+      card.className = 'item-card';
+     card.innerHTML = `
+<img src="${item.image || 'https://via.placeholder.com/250x180'}" alt="${item.item_name}" class="item-image">
+  <h3>${item.item_name}</h3>
+  <p><strong>Category:</strong> ${item.category}</p>
+  <p><strong>Found at:</strong> ${item.location}</p>
+  <a href="claims.html?id=${item.id}">Claim This</a>
+`;
+
+      results.appendChild(card);
+    });
+  }
+
+  function setupPagination(list) {
+    const totalPages = Math.ceil(list.length / itemsPerPage);
+    const pagination = document.getElementById('pagination');
+    pagination.innerHTML = '';
+
+    for (let i = 1; i <= totalPages; i++) {
+      const btn = document.createElement('button');
+      btn.innerText = i;
+      btn.classList.add('page-btn');
+      if (i === currentPage) btn.classList.add('active');
+
+      btn.addEventListener('click', () => {
+        currentPage = i;
+        displayItems(list, currentPage);
+        setupPagination(list);
+      });
+
+      pagination.appendChild(btn);
+    }
+  }
+
+  document.getElementById("category-filter").addEventListener("change", () => {
+    currentPage = 1;
+    filterByCategory();
+  });
+
+  fetchItems(); // Load from database
+});
+</script>
+
+
+</body>
+</html>

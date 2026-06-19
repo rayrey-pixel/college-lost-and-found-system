@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Lost and Found</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      height: 100vh;
+      background: linear-gradient(to bottom right, #38bdf8, #f0f9ff);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .splash-container {
+      background-color: #ffffffee;
+      border-radius: 20px;
+      padding: 40px 30px;
+      text-align: center;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      width: 90%;
+      max-width: 420px;
+      max-height: 420px ;
+      animation: fadeIn 1.2s ease-out;
+    }
+
+    .logo {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: #0c4a6e;
+      margin-bottom: 30px;
+      animation: logoPop 1s ease-in-out;
+    }
+
+    .loading-bar {
+      width: 100%;
+      height: 10px;
+      background: #e0f2fe;
+      border-radius: 50px;
+      overflow: hidden;
+      box-shadow: inset 0 0 5px rgba(8,145,178,0.3);
+      margin-top: 20px;
+    }
+
+    .loading-bar-fill {
+      height: 100%;
+      width: 0%;
+      background: #0284c7;
+      animation: fillBar 3s ease-in-out forwards;
+    }
+
+    .loading-text {
+      color: #0369a1;
+      font-weight: 500;
+      margin-top: 10px;
+      font-size: 1rem;
+    }
+
+    @keyframes fillBar {
+      to {
+        width: 100%;
+      }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes logoPop {
+      from { opacity: 0; transform: scale(0.8); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    #main {
+      display: none;
+      text-align: center;
+    }
+
+    #main h1 {
+      font-size: 2rem;
+      color: #0369a1;
+    }
+  </style>
+</head>
+<body>
+  <div id="splash" class="splash-container">
+    <div class="logo">📦 Lost & Found</div>
+    <div class="loading-bar">
+      <div class="loading-bar-fill"></div>
+    </div>
+    <div class="loading-text">Loading system...</div>
+  </div>
+
+  <div id="main">
+    <h1>Welcome to the Campus Lost & Found System!</h1>
+    <!-- Actual content goes here -->
+  </div>
+
+  <script>
+    setTimeout(() => {
+      document.getElementById('splash').style.display = 'none';
+      document.getElementById('main').style.display = 'block';
+    }, 3000);
+  </script>
+</body>
+</html>

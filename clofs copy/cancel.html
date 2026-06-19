@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cancel Report | LOF</title>
+<link rel="stylesheet" href="style.css"/>
+
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      background-color: #f5f9ff;
+    }
+    .cancel-section {
+      max-width: 500px;
+      margin: 40px auto;
+      background: #ffffff;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      animation: fadeIn 1s ease;
+    }
+
+    .cancel-section h2 {
+      color: #023e8a;
+      margin-bottom: 15px;
+    }
+
+    .cancel-section label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+
+    .cancel-section input[type="text"],
+    .cancel-section input[type="email"] {
+      width: 100%;
+      padding: 10px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      margin-bottom: 15px;
+    }
+
+    .cancel-section button {
+      background-color: #023e8a;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .cancel-section button:hover {
+      background-color: #0353a4;
+    }
+
+    .recaptcha-placeholder {
+      background: #e0e0e0;
+      text-align: center;
+      padding: 12px;
+      border-radius: 6px;
+      margin-bottom: 15px;
+      font-size: 14px;
+      color: #555;
+    }
+
+    /* Confirmation Popup */
+    .confirm-dialog {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.4);
+      display: none;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .confirm-box {
+      background: white;
+      padding: 25px;
+      border-radius: 10px;
+      text-align: center;
+      max-width: 350px;
+    }
+
+    .confirm-box p {
+      margin-bottom: 20px;
+    }
+
+    .confirm-box button {
+      margin: 0 10px;
+      padding: 8px 16px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .confirm-btn {
+      background-color: #d00000;
+      color: #fff;
+    }
+
+    .cancel-btn {
+      background-color: #ccc;
+    }
+
+    
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 600px) {
+      .footer-container {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Nav -->
+ <nav class="navbar">
+        <div class="logo">CLOF</div>
+        <ul class="nav-links">
+            <li><a href="dashboard.html">Home</a></li>
+           <!-- <li><a href="history.html">History</a></li>-->
+<a href="history.php?email=user@example.com">History</a> 
+            <li><a href="search.html">Search</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="help.html">Help</a></li>
+        </ul>
+    </nav>
+
+  <!-- Cancel Form -->
+  <section class="cancel-section">
+   <h2>Cancel Report</h2>
+<form id="cancelForm" action="cancel.php" method="POST">
+  <label for="reportType">Report Type:</label>
+  <select name="report_type" id="reportType" required>
+    <option value="lost">Lost Item</option>
+    <option value="found">Found Item</option>
+  </select>
+
+  <label for="verification_code">Verification Code:</label>
+  <input type="text" id="verification_code" name="verification_code" required />
+
+  <label for="email">Your Email:</label>
+  <input type="email" id="email" name="email" required />
+
+  <div class="g-recaptcha" data-sitekey="your_site_key_here"></div>
+  <br>
+
+  <button type="submit">Cancel Report</button>
+</form>
+
+  </section>
+
+  <!-- Confirmation Dialog -->
+  <div class="confirm-dialog" id="confirmDialog">
+    <div class="confirm-box">
+      <p>Are you sure you want to cancel this report?</p>
+      <button class="confirm-btn" id="yesDelete">Yes, Cancel</button>
+      <button class="cancel-btn" id="noDelete">No, Go Back</button>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-column">
+        <h3>Contact Us</h3>
+        <ul>
+          <li>Email: <a href="mailto:support@lofcollege.com">support@lofcollege.com</a></li>
+          <li>Phone: +255 712 345 678</li>
+          <li>Office: Room 12, Admin Block</li>
+          <li>Hours: Mon - Fri | 9AM - 5PM</li>
+        </ul>
+      </div>
+
+      <div class="footer-column">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="about.html">About This System</a></li>
+          <li><a href="help.html">Help & FAQ</a></li>
+          <li><a href="search.html">Search Lost Item</a></li>
+          <li><a href="found.html">Report Found Item</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; 2025 LOF College. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script>
+   const form = document.getElementById("cancelForm");
+const dialog = document.getElementById("confirmDialog");
+const yesBtn = document.getElementById("yesDelete");
+const noBtn = document.getElementById("noDelete");
+
+form.addEventListener("submit", (e) => {
+  e.preventDefault();
+  dialog.style.display = "flex";
+});
+
+noBtn.addEventListener("click", () => {
+  dialog.style.display = "none";
+});
+
+yesBtn.addEventListener("click", () => {
+  dialog.style.display = "none";
+  form.submit(); // ✅ submit it here
+});
+
+  </script>
+</body>
+</html>

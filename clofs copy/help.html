@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Help & FAQ - Lost & Found</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+        <div class="logo">CLOF</div>
+        <ul class="nav-links">
+            <li><a href="dashboard.html">Home</a></li>
+           <!-- <li><a href="history.html">History</a></li>-->
+<a href="history.php?email=user@example.com">History</a> 
+            <li><a href="search.html">Search</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="help.html">Help</a></li>
+        </ul>
+    </nav>
+  <!-- Hero -->
+  <section class="hero help-hero">
+    <h1>Need Help? We Got You!</h1>
+    <p>Find answers to common questions or contact us for more assistance.</p>
+  </section>
+
+  <!-- Help Topics -->
+  <section class="help-topics">
+    <div class="help-card">
+      <h3>🔍 Searching for Lost Items</h3>
+      <p>Learn how to effectively search for reported lost items using filters and item descriptions.</p>
+    </div>
+    <div class="help-card">
+      <h3>📦 Reporting Found Items</h3>
+      <p>Steps for submitting found item reports, including attaching images and setting a secret question.</p>
+    </div>
+    <div class="help-card">
+      <h3>🧾 Claiming a Lost Item</h3>
+      <p>How to claim items you've found in the system and provide the correct secret answer.</p>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq-section">
+    <h2>Frequently Asked Questions</h2>
+    <div class="faq">
+      <button class="faq-question">How do I report a found item?</button>
+      <div class="faq-answer">Click on “Report Found Item” from the homepage, fill in the details, upload a photo, and set a secret question for security.</div>
+
+      <button class="faq-question">What if my search shows no results?</button>
+      <div class="faq-answer">Try adjusting the search terms, dates, or item categories. Items may take time to be uploaded.</div>
+
+      <button class="faq-question">How does the claim verification work?</button>
+      <div class="faq-answer">You’ll need to correctly answer the secret question set by the reporter. Staff may follow up if needed.</div>
+
+      <button class="faq-question">Can I edit or cancel a report?</button>
+      <div class="faq-answer">Currently, edits must be made by contacting our support team directly.</div>
+    </div>
+  </section>
+
+  <!-- Support Info -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-column">
+        <h3>Contact Us</h3>
+        <ul>
+          <li>Email: <a href="mailto:support@lofcollege.com">support@lofcollege.com</a></li>
+          <li>Phone: +255 712 345 678</li>
+          <li>Hours: Mon - Fri | 9AM - 5PM</li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="about.html">About</a></li>
+          <li><a href="dashboard.html">Home</a></li>
+          <li><a href="search.html">Search</a></li>
+          <li><a href="found.html">Report</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 LOF College. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Simple accordion for FAQ
+    document.querySelectorAll(".faq-question").forEach(button => {
+      button.addEventListener("click", () => {
+        button.classList.toggle("active");
+        const answer = button.nextElementSibling;
+        answer.style.display = answer.style.display === "block" ? "none" : "block";
+      });
+    });
+  </script>
+
+</body>
+</html>

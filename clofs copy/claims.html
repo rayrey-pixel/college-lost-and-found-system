@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Claim Lost Item</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+
+<body>
+  <nav class="navbar">
+        <div class="logo">CLOF</div>
+        <ul class="nav-links">
+            <li><a href="dashboard.html">Home</a></li>
+           <!-- <li><a href="history.html">History</a></li>-->
+<a href="history.php?email=user@example.com">History</a> 
+            <li><a href="search.html">Search</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="help.html">Help</a></li>
+        </ul>
+    </nav>
+
+  <section class="form-section">
+    <form class="report-form" action="submit_claim.php" method="POST">
+      <h1>Claim Lost Item</h1>
+
+      <input type="hidden" id="item-id" name="item_id">
+
+      <label for="claimed-item">Item You're Claiming</label>
+      <input type="text" id="claimed-item" name="claimed-item" required>
+
+      <label for="full-name">Your Full Name</label>
+      <input type="text" id="full-name" name="full-name" required>
+
+      <label for="email">Email Address</label>
+      <input type="email" id="email" name="email" required>
+
+      <label for="phone">Phone Number</label>
+      <input type="tel" id="phone" name="phone" required>
+
+      <label for="ownership-question">Secret Question</label>
+      <input type="text" id="ownership-question" disabled>
+
+      <label for="ownership-answer">Your Answer</label>
+      <input type="text" id="ownership-answer" name="ownership-answer" required>
+
+      <div id="optional-qn-section" style="display: none;">
+        <label for="optional-question">Custom Question</label>
+        <input type="text" id="optional-question" disabled>
+
+        <label for="optional-answer">Answer to Custom Question</label>
+        <input type="text" id="optional-answer" name="optional-answer">
+      </div>
+
+      <label for="more-details">Any Other Details (Optional)</label>
+      <textarea id="more-details" name="more-details" rows="4"></textarea>
+
+      <button type="submit" class="submit-btn">Submit Claim</button>
+    </form>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-column">
+        <h3>Contact Us</h3>
+        <ul>
+          <li>Email: <a href="mailto:support@lofcollege.com">support@lofcollege.com</a></li>
+          <li>Phone: +255 712 345 678</li>
+          <li>Office: Room 12, Admin Block</li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="about.html">About This System</a></li>
+          <li><a href="help.html">Help & FAQ</a></li>
+          <li><a href="search.html">Search Lost Item</a></li>
+          <li><a href="found.html">Report Found Item</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 LOF College. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const params = new URLSearchParams(window.location.search);
+      const itemId = params.get("id");
+
+      if (itemId) {
+        document.getElementById("item-id").value = itemId;
+
+        fetch(`get_item_details.php?id=${itemId}`)
+          .then(res => res.json())
+          .then(data => {
+            document.getElementById("claimed-item").value = data.item_name || "";
+            document.getElementById("ownership-question").value = data.secret_question || "N/A";
+
+            if (data.custom_question) {
+              document.getElementById("optional-qn-section").style.display = "block";
+              document.getElementById("optional-question").value = data.custom_question;
+            }
+          })
+          .catch(() => alert("Failed to load item details."));
+      }
+    });
+    
+  </script>
+</body>
+</html>
