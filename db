@@ -1,0 +1,256 @@
+-- phpMyAdmin SQL Dump
+-- version 5.2.1
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Generation Time: Jun 19, 2026 at 03:06 PM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `clofs`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `claims`
+--
+
+CREATE TABLE `claims` (
+  `id` int(11) NOT NULL,
+  `item_id` int(11) NOT NULL,
+  `item_name` varchar(255) NOT NULL,
+  `full_name` varchar(255) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `phone` varchar(20) NOT NULL,
+  `ownership_answer` text NOT NULL,
+  `optional_answer` text DEFAULT NULL,
+  `more_details` text DEFAULT NULL,
+  `claim_time` timestamp NOT NULL DEFAULT current_timestamp(),
+  `status` varchar(20) DEFAULT 'Pending'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `claims`
+--
+
+INSERT INTO `claims` (`id`, `item_id`, `item_name`, `full_name`, `email`, `phone`, `ownership_answer`, `optional_answer`, `more_details`, `claim_time`, `status`) VALUES
+(1, 16, 'book', 'jozb jozb', 'eunner006@gmail.com', '0725120592', 'a yellow note with red written words', '', 'song of lawino, with black cover\r\n', '2025-07-24 10:12:23', 'Pending'),
+(2, 16, 'fvgb', 'ghn', 'amani44@gmail.com', '0755433456', 'a brown puppy', '', 'fghj', '2025-07-24 10:24:15', 'Pending'),
+(3, 16, 'fvgb', 'ghn', 'amani44@gmail.com', '0755433456', 'a brown puppy', '', 'fghj', '2025-07-24 10:24:56', 'Matched'),
+(4, 16, 'book', 'jozb jozb', 'eckner006@gmail.com', '0625120592', 'yes there was a yellow note with red written words', '', 'the title of the book was \"song of lawino\"', '2025-07-24 10:30:46', 'Matched'),
+(5, 16, 'book', 'Amani Joseph', 'preem604@gmail.com', '0620657290', 'A YEVCBNM', '', 'DFGSHJKLDCDBXNM', '2025-07-24 13:56:39', 'Matched'),
+(6, 16, 'book', 'Amani Joseph', 'prettm604@gmail.com', '0620657290', 'A YEVCBNM', '', 'DFGSHJKLDCDBXNM', '2025-07-24 13:56:41', 'Matched');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `found_items`
+--
+
+CREATE TABLE `found_items` (
+  `id` int(11) NOT NULL,
+  `item_type` varchar(100) DEFAULT NULL,
+  `email` varchar(100) DEFAULT NULL,
+  `full_name` varchar(100) DEFAULT NULL,
+  `phone` varchar(20) DEFAULT NULL,
+  `item_name` varchar(255) DEFAULT NULL,
+  `description` text DEFAULT NULL,
+  `location` varchar(255) DEFAULT NULL,
+  `secret_question` text DEFAULT NULL,
+  `custom_question` text DEFAULT NULL,
+  `date_found` datetime DEFAULT NULL,
+  `photo_path` varchar(255) DEFAULT NULL,
+  `secret_answer` text DEFAULT NULL,
+  `unique_answer` text DEFAULT NULL,
+  `verification_code` varchar(10) DEFAULT NULL,
+  `status` varchar(20) DEFAULT 'Found'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `found_items`
+--
+
+INSERT INTO `found_items` (`id`, `item_type`, `email`, `full_name`, `phone`, `item_name`, `description`, `location`, `secret_question`, `custom_question`, `date_found`, `photo_path`, `secret_answer`, `unique_answer`, `verification_code`, `status`) VALUES
+(1, 'bag', 'reheupia@gmail.com', '', '0620657290', 'black bag', 'blue pen, black notebook, gray earpods inside', 'Main Gate', 'What brand is the bag?', '', '2025-07-22 00:00:00', 'uploads/6880a8296715a_4.jpg', 'channel', '', '104481', 'found'),
+(2, 'bag', 'prettyk604@gmail.com', '', '0621345687', 'purse', 'linen purse, scratches on the side, chain strap', 'Toilets', 'What is inside the bag?', '', '2025-07-22 00:00:00', 'uploads/6880a934cfc40_a.jpg', 'makeup kit, mirror, pen, wallet', '', '982385', 'found'),
+(3, 'wallet', 'john.doe@gmail.com', 'John Doe', '0712345678', 'brown wallet', 'contains ID, credit card, and some cash', 'Library', 'What is the brand of the wallet?', 'What color is the inner lining?', '2025-07-21 10:30:00', 'uploads/6880a944cfc40_8.jpg', 'gucci', 'blue', '204582', 'found'),
+(4, 'phone', 'sarah.smith@gmail.com', 'Sarah Smith', '0723456789', 'silver iPhone', 'iPhone 12 with black case', 'Cafeteria', 'What is the phone’s lock screen image?', 'Any visible scratches?', '2025-07-20 14:15:00', '', 'mountain', 'yes', '305693', 'found'),
+(5, 'laptop', 'mike.jones@gmail.com', 'Mike Jones', '0734567890', 'Dell laptop', '15-inch Dell XPS, silver color', 'Lecture Hall A', 'What is the laptop’s brand?', 'What’s the background wallpaper?', '2025-07-19 09:00:00', '', 'dell', 'cityscape', '406704', 'found'),
+(6, 'keys', 'emma.wilson@gmail.com', 'Emma Wilson', '0745678901', 'car keys', 'Toyota key with red keychain', 'Parking Lot B', 'What is the keychain color?', 'How many keys are on the ring?', '2025-07-18 16:45:00', '', 'red', 'three', '507815', 'found'),
+(7, 'backpack', 'david.brown@gmail.com', 'David Brown', '0756789012', 'green backpack', 'contains textbooks and a water bottle', 'Gym', 'What is the backpack’s brand?', 'What’s inside the front pocket?', '2025-07-17 12:00:00', '', 'nike', 'pen', '608926', 'found'),
+(8, 'watch', 'lisa.taylor@gmail.com', 'Lisa Taylor', '0767890123', 'silver watch', 'analog watch with leather strap', 'Study Room 3', 'What is the watch’s brand?', 'What’s the strap material?', '2025-07-16 11:20:00', '', 'rolex', 'leather', '709037', 'found'),
+(9, 'glasses', 'chris.moore@gmail.com', 'Chris Moore', '0778901234', 'black glasses', 'reading glasses in a blue case', 'Auditorium', 'What color is the glasses case?', 'What’s the lens shape?', '2025-07-15 08:30:00', '', 'blue', 'round', '810148', 'found'),
+(10, 'umbrella', 'anna.white@gmail.com', 'Anna White', '0789012345', 'red umbrella', 'compact foldable umbrella', 'Main Entrance', 'What is the umbrella’s color?', 'Is it foldable?', '2025-07-14 13:10:00', '', 'red', 'yes', '911259', 'found'),
+(11, 'jacket', 'peter.green@gmail.com', 'Peter Green', '0790123456', 'blue jacket', 'hooded jacket with zipper', 'Classroom C', 'What is the jacket’s brand?', 'What’s in the pockets?', '2025-07-13 15:50:00', '', 'adidas', 'keys', '012360', 'found'),
+(12, 'earphones', 'mary.jackson@gmail.com', 'Mary Jackson', '0701234567', 'white earphones', 'wireless earbuds in charging case', 'Bus Stop', 'What brand are the earphones?', 'What’s the case color?', '2025-07-12 17:00:00', '', 'apple', 'white', '123471', 'found'),
+(13, 'book', 'emmystepha77@gmail.com', '', '0750567867', 'note book', 'maths note book, personal details infront', 'Main Gate', 'Is there any personal note inside?', '', '2025-07-18 00:00:00', 'uploads/6880c4f9d18d0_f.jpg', 'a love letter', '', '867309', 'found'),
+(14, 'others', 'silase@gmail.com', '', '0765433232', 'id', 'student id', 'Library', 'Describe a unique detail about the item.', 'whats the name', '2025-07-23 00:00:00', 'uploads/6880c5d996a00_1.jpg', 'scratches all over', 'babara benfod', '344683', 'found'),
+(15, 'phone', 'isackussa966@gmil.com', '', '0654654523', 'iphone 10', 'cracked, old, used', 'Main Gate', 'What is the lock screen wallpaper?', '', '2025-07-22 00:00:00', 'uploads/6880c660a482e_h.jpg', 'flowers', '', '649096', 'found'),
+(16, 'book', 'eckseyedwin@gmail.com', '', '0713468765', 'song of lawino', 'tittled song of lawino on the cover,worned a little,named daud inside the last page', 'Library', 'Is there any personal note inside?', '', '2025-07-23 00:00:00', 'uploads/688202d3b2827_6.jpg', 'a yellow stick note with red written words', '', '218976', 'found'),
+(17, 'phone', 'maraib@gmail.com', '', '0620766785', 'iphone 10', 'WHITE COVER', 'Main Gate', 'What is the lock screen wallpaper?', '', '2025-07-26 00:00:00', 'uploads/68823afe77ccb_5.jpg', 'RED FLOWER', '', '250862', 'found');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `lost_items`
+--
+
+CREATE TABLE `lost_items` (
+  `id` int(11) NOT NULL,
+  `item_type` varchar(100) DEFAULT NULL,
+  `item_name` varchar(255) DEFAULT NULL,
+  `description` text DEFAULT NULL,
+  `location` varchar(255) DEFAULT NULL,
+  `date_lost` date DEFAULT NULL,
+  `full_name` varchar(100) DEFAULT NULL,
+  `email` varchar(150) DEFAULT NULL,
+  `phone` varchar(50) DEFAULT NULL,
+  `report_time` timestamp NOT NULL DEFAULT current_timestamp(),
+  `verification_code` varchar(10) DEFAULT NULL,
+  `status` varchar(20) DEFAULT 'Lost'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `lost_items`
+--
+
+INSERT INTO `lost_items` (`id`, `item_type`, `item_name`, `description`, `location`, `date_lost`, `full_name`, `email`, `phone`, `report_time`, `verification_code`, `status`) VALUES
+(1, 'bag', 'big bag', 'black bag, with note book, pens and a calculator inside', 'library', '2025-07-19', 'amina madel', 'aminadel@gmail.com', '0720657898', '2025-07-23 09:10:34', '389661', 'lost'),
+(2, 'phone', 'iphone x', 'cracked on the back, anime wallpaper, ', 'field', '2025-07-20', 'subira mabaka', 'subiram@gmail.com', '0750567867', '2025-07-23 09:13:01', '830587', 'lost'),
+(4, 'bag', 'big bag', 'BLACK BAG', 'field', '2025-07-25', 'subira mabaka', 'maryjane@gmail.com', '0755433456', '2025-07-24 13:51:58', '990188', 'lost'),
+(5, 'bag', 'big bag', 'BLACK BAG', 'field', '2025-07-25', 'subira mabaka', 'maryjane@gmail.com', '0755433456', '2025-07-24 13:52:00', '148078', 'lost'),
+(6, 'bag', 'big bag', 'BLACK BAG', 'field', '2025-07-25', 'subira mabaka', 'maryjane@gmail.com', '0755433456', '2025-07-24 13:52:02', '500845', 'lost'),
+(7, 'bag', 'big bag', 'BLACK BAG', 'field', '2025-07-25', 'subira mabaka', 'maryjane@gmail.com', '0755433456', '2025-07-24 13:52:04', '876597', 'lost'),
+(8, 'bag', 'big bag', 'BLACK BAG', 'field', '2025-07-25', 'subira mabaka', 'maryjane@gmail.com', '0755433456', '2025-07-24 13:52:06', '297053', 'lost'),
+(9, 'bag', 'big bag', 'BLACK BAG', 'field', '2025-07-25', 'subira mabaka', 'maryjane@gmail.com', '0755433456', '2025-07-24 13:52:08', '702613', 'lost'),
+(10, 'bag', 'big bag', 'BLACK BAG', 'field', '2025-07-25', 'subira mabaka', 'maryjane@gmail.com', '0755433456', '2025-07-24 13:52:08', '680146', 'lost'),
+(11, 'bag', 'big bag', 'BLACK BAG', 'field', '2025-07-25', 'subira mabaka', 'maryjane@gmail.com', '0755433456', '2025-07-24 13:52:10', '201485', 'lost'),
+(12, 'bag', 'big bag', 'BLACK BAG', 'field', '2025-07-25', 'subira mabaka', 'maryjane@gmail.com', '0755433456', '2025-07-24 13:52:11', '495293', 'lost'),
+(13, 'bag', 'big bag', 'BLACK BAG', 'field', '2025-07-25', 'subira mabaka', 'maryjane@gmail.com', '0755433456', '2025-07-24 13:52:13', '779289', 'lost');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `match_logs`
+--
+
+CREATE TABLE `match_logs` (
+  `id` int(11) NOT NULL,
+  `lost_id` int(11) DEFAULT NULL,
+  `found_id` int(11) DEFAULT NULL,
+  `claim_id` int(11) DEFAULT NULL,
+  `match_score` float DEFAULT NULL,
+  `status` varchar(50) DEFAULT 'pending',
+  `match_time` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `match_logs`
+--
+
+INSERT INTO `match_logs` (`id`, `lost_id`, `found_id`, `claim_id`, `match_score`, `status`, `match_time`) VALUES
+(1, 1, 1, NULL, 32.5, 'pending', '2025-07-23 09:15:42'),
+(2, 1, 2, NULL, 23.24, 'pending', '2025-07-23 09:20:02'),
+(3, 2, 15, NULL, 30, 'pending', '2025-07-23 11:24:22'),
+(4, 3, 13, NULL, 21.18, 'pending', '2025-07-24 09:42:52'),
+(5, 3, 16, NULL, 25.18, 'pending', '2025-07-24 09:54:27'),
+(6, 16, 1, 4, 23, 'pending', '2025-07-24 10:30:46'),
+(7, 16, 2, 4, 20, 'pending', '2025-07-24 10:31:00'),
+(8, 16, 13, 4, 38, 'pending', '2025-07-24 10:31:14'),
+(9, 16, 16, 4, 40, 'pending', '2025-07-24 10:31:28'),
+(10, 4, 1, NULL, 25.37, 'pending', '2025-07-24 13:51:58'),
+(11, 5, 1, NULL, 25.37, 'pending', '2025-07-24 13:52:00'),
+(12, 6, 1, NULL, 25.37, 'pending', '2025-07-24 13:52:02'),
+(13, 7, 1, NULL, 25.37, 'pending', '2025-07-24 13:52:04'),
+(14, 8, 1, NULL, 25.37, 'pending', '2025-07-24 13:52:06'),
+(15, 4, 2, NULL, 21.25, 'pending', '2025-07-24 13:52:07'),
+(16, 9, 1, NULL, 25.37, 'pending', '2025-07-24 13:52:08'),
+(17, 10, 1, NULL, 25.37, 'pending', '2025-07-24 13:52:08'),
+(18, 5, 2, NULL, 21.25, 'pending', '2025-07-24 13:52:09'),
+(19, 11, 1, NULL, 25.37, 'pending', '2025-07-24 13:52:10'),
+(20, 12, 1, NULL, 25.37, 'pending', '2025-07-24 13:52:11'),
+(21, 6, 2, NULL, 21.25, 'pending', '2025-07-24 13:52:11'),
+(22, 13, 1, NULL, 25.37, 'pending', '2025-07-24 13:52:13'),
+(23, 7, 2, NULL, 21.25, 'pending', '2025-07-24 13:52:14'),
+(24, 8, 2, NULL, 21.25, 'pending', '2025-07-24 13:52:15'),
+(25, 9, 2, NULL, 21.25, 'pending', '2025-07-24 13:52:18'),
+(26, 10, 2, NULL, 21.25, 'pending', '2025-07-24 13:52:18'),
+(27, 12, 2, NULL, 21.25, 'pending', '2025-07-24 13:52:21'),
+(28, 11, 2, NULL, 21.25, 'pending', '2025-07-24 13:52:21'),
+(29, 13, 2, NULL, 21.25, 'pending', '2025-07-24 13:52:23'),
+(30, 2, 17, NULL, 23.57, 'pending', '2025-07-24 13:54:10'),
+(31, 16, 13, 5, 24, 'pending', '2025-07-24 13:56:39'),
+(32, 16, 13, 6, 24, 'pending', '2025-07-24 13:56:41');
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `claims`
+--
+ALTER TABLE `claims`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `found_items`
+--
+ALTER TABLE `found_items`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `lost_items`
+--
+ALTER TABLE `lost_items`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `match_logs`
+--
+ALTER TABLE `match_logs`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `claims`
+--
+ALTER TABLE `claims`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `found_items`
+--
+ALTER TABLE `found_items`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+
+--
+-- AUTO_INCREMENT for table `lost_items`
+--
+ALTER TABLE `lost_items`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
+-- AUTO_INCREMENT for table `match_logs`
+--
+ALTER TABLE `match_logs`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
